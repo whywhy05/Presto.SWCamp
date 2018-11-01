@@ -8,20 +8,60 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+//Operators 
 namespace WindowsFormsApp1
 {
-    public enum Operators{Add,Sub,Multi,Div,Result}        //덧셈, 뺼셈, 곱셈,나눗셈 변수 지정.
+    
+
+    public enum Operators
+    {
+        Add,
+        Sub,
+        Multi,
+        Div,
+        Result
+    }
+
+    //public enum Operators{Add,Sub,Multi,Div,Result}        //덧셈, 뺼셈, 곱셈,나눗셈 변수 지정.
 
     public partial class Calculator : Form
     {
+        
+        /// const int CONST_ADD = 0;          //{ enum 함수를 c++  style 표현.}
+        /// const int CONST_SUB = 1;
+        /// const int CONST_MULTI = 2;
+        /// const int CONST_Div = 3;
+        /// const int CONST_Result = 4;
+        
+
         public int Result = 0;      //Result =0 ;; 
         public bool isNewNum = true;     //계산값을 나타내는 스크린
         public bool isStartNum = true;   // 결과값을 나타내는 스크린.
         public Operators Opt = Operators.Add;
+        public Operators lastOperator = Operators.Add;
 
-        public Calculator()         
+        public Calculator()
         {
-            InitializeComponent();
+            if (lastOperator == Operators.Add)
+            {
+
+            }
+            else if (lastOperator == Operators.Sub)
+            {
+
+            }
+            else if (lastOperator == Operators.Multi)
+            {
+
+            }
+            else if (lastOperator == Operators.Div)
+            {
+
+            }
+            else if (lastOperator == Operators.Result) ;
+        }
+                InitializeComponent();
             //int number1;
         }
 
@@ -69,8 +109,8 @@ namespace WindowsFormsApp1
             if (isNewNum == false)
             {
                 int num = int.Parse(ResultScreen.Text);              //변수num 지정.
-                if (Opt == Operators.Add)          //Opt == operators 에 더한다.
-                    Result += num;                 //결과값을 변수에저장된값과 더하여 출력
+                if (Opt == Operators.Add)          //Opt == operators ?
+                    Result += num;                 //결과값을 변수에저장된값과 더함
                 else if (Opt == Operators.Sub)
                 {
                     Result -= num;
@@ -85,43 +125,43 @@ namespace WindowsFormsApp1
                 }
                 else if (Opt == Operators.Result)
                 {
-                    NumberScreen.Text = Result.ToString();
+                    NumberScreen.Text = Result.ToString();      //정수를 문자로 바꿔줌 - 수식값
                 }
-                ResultScreen.Text = Result.ToString();
-                isNewNum = true;
+                ResultScreen.Text = Result.ToString();         //정수를 문자로 바꿔줌 - 결과값
+                isNewNum = true;      
             }
 
 
             Button optButton = (Button)sender;
-            if (optButton.Text == "+")
+            if (optButton.Text == "+")//+버튼을 누를때
             {
-                Opt = Operators.Add;
-                NumberScreen.Text += "+";
+                Opt = Operators.Add; // 더한다
+                NumberScreen.Text += "+"; //수식창에 + 출력
             }           
-            else if (optButton.Text == "-")
+            else if (optButton.Text == "-") //- 을 눌릴때
             {
-                Opt = Operators.Sub;
-                NumberScreen.Text += "-";
+                Opt = Operators.Sub;      //뺄셈
+                NumberScreen.Text += "-"; //수식창에 - 출력
             }          
             else if (optButton.Text == "*")
             {
-                Opt = Operators.Multi;
-                NumberScreen.Text += "*";
+                Opt = Operators.Multi;     //곱셈
+                NumberScreen.Text += "*";     //수식창에 * 출력
             }           
             else if (optButton.Text == "/")
             {
                 Opt = Operators.Div;
                 NumberScreen.Text += "/";
             }     
-            else if (optButton.Text == "=")
+            else if (optButton.Text == "=")    //
             {
-                Result = 0;
+                Result = 0;          //0으로 초기화
                 isNewNum = true;
                 isStartNum = true;
 
-                Opt = Operators.Add;
+                Opt = Operators.Add;    //입력하기전의상태로 돌려줌.
 
-                NumberScreen.Text = "0";
+                NumberScreen.Text = "0";  //수식창 초기화.
             }
         }
 
@@ -131,13 +171,13 @@ namespace WindowsFormsApp1
         }
         public void Clear()
         {
-            Result = 0;
-            isNewNum = true;
+            Result = 0;        //초기화 과정
+            isNewNum = true;   
             isStartNum = true;
             Opt = Operators.Add;
 
-            NumberScreen.Text = "0";
-            ResultScreen.Text = "0";
+            NumberScreen.Text = "0";     
+            ResultScreen.Text = "0";     
         }
     }
 }
